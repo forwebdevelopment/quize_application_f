@@ -1,0 +1,59 @@
+<div class="filter-page">
+  <aside class="filter-panel">
+    <h2>Filter Quizzes</h2>
+
+    <!-- Category -->
+    <label>Category:</label>
+    <select [(ngModel)]="filters.category" name="category">
+      <option value="">All</option>
+      <option value="tech">Tech</option>
+      <option value="non-tech">Non-Tech</option>
+    </select>
+
+    <!-- Level -->
+    <label>Level:</label>
+    <select [(ngModel)]="filters.level" name="level">
+      <option value="">Beginar</option>
+      <option value="high">Mediuam</option>
+      <option value="low">Advance</option>
+    </select>
+
+    <!-- Syllabus -->
+    <label>Syllabus:</label>
+    <select [(ngModel)]="filters.syllabus" name="syllabus">
+      <option value="">All</option>
+      <option value="C#">C#</option>
+      <option value="SQL">SQL</option>
+      <option value="Python">Python</option>
+    </select>
+
+    <!-- Timer -->
+    <label>
+      <input type="checkbox" [(ngModel)]="filters.useTimer" name="useTimer" />
+      Enable Timer
+    </label>
+
+    <div *ngIf="filters.useTimer">
+      <label>Time per question:</label>
+      <input
+        type="text"
+        [(ngModel)]="filters.timePerQuestion"
+        name="timePerQuestion"
+        placeholder="e.g. 1 minute or 30 seconds"
+      />
+    </div>
+
+    <button (click)="applyFilters()">Apply Filters</button>
+  </aside>
+
+  <section class="quiz-results">
+    <h3>Filtered Quizzes</h3>
+    <div *ngFor="let quiz of filteredQuizzes" class="quiz-card">
+      <h4>{{ quiz.title }}</h4>
+      <p>Category: {{ quiz.category }}</p>
+      <p>Level: {{ quiz.level }}</p>
+      <p>Syllabus: {{ quiz.syllabus.join(', ') }}</p>
+      <p *ngIf="filters.useTimer">Timer: {{ filters.timePerQuestion }}</p>
+    </div>
+  </section>
+</div>
