@@ -1,1 +1,24 @@
-<p>start-quiz works!</p>
+<div class="quiz-container">
+  <div class="quiz-header">
+    <div class="header-item timer">⏱ {{ timer }}</div>
+    <div class="header-item counter">Question {{ currentQuestion }}/{{ totalQuestions }}</div>
+    <div class="header-item total-time">Total Time: {{ totalTime }} minut</div>
+  </div>
+
+  <div class="question-block">
+    
+    <h2>Q{{ currentQuestion }}. {{ question.text }}</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of question.options"
+          [class.selected]="selectedOption === option"
+          (click)="selectOption(option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="navigation-buttons">
+    <button (click)="previousQuestion()">Previous</button>
+    <button (click)="nextQuestion()">Next</button>
+  </div>
+</div>

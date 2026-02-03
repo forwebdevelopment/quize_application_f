@@ -4,29 +4,37 @@
 
     <!-- Category -->
     <label>Category:</label>
-    <select [(ngModel)]="filters.category" name="category">
-      <option value="">All</option>
-      <option value="tech">Tech</option>
-      <option value="non-tech">Non-Tech</option>
+    <select [(ngModel)]="filters.category" name="category" (ngModelChange)="onChangeCateory()">
+        @for (item of Category; track $index) 
+        {
+          <option>{{item}}</option>
+        }
+      
     </select>
 
     <!-- Level -->
+
+        @if (isTech) {
     <label>Level:</label>
     <select [(ngModel)]="filters.level" name="level">
-      <option value="">Beginar</option>
-      <option value="high">Mediuam</option>
-      <option value="low">Advance</option>
+      <option value="Beginar">Beginar</option>
+      <option value="Intermediat">Intermediat</option>
+      <option value="Advance">Advance</option>
     </select>
+}
+ 
 
     <!-- Syllabus -->
+     @if (filters.category!='Select Category') {
     <label>Syllabus:</label>
     <select [(ngModel)]="filters.syllabus" name="syllabus">
-      <option value="">All</option>
-      <option value="C#">C#</option>
-      <option value="SQL">SQL</option>
-      <option value="Python">Python</option>
+        @for (item of syllabus; track $index) {
+           @if (item.cat==filters.category) {
+           <option [value]="item.value">{{item.value}}</option>
+           }
+        }
     </select>
-
+     }
     <!-- Timer -->
     <label>
       <input type="checkbox" [(ngModel)]="filters.useTimer" name="useTimer" />
@@ -48,7 +56,7 @@
 
   <section class="quiz-results">
     <h3>Filtered Quizzes</h3>
-    <div *ngFor="let quiz of filteredQuizzes" class="quiz-card">
+    <div *ngFor="let quiz of filteredQuizzes" class="quiz-card" routerLink="/quiz_start">
       <h4>{{ quiz.title }}</h4>
       <p>Category: {{ quiz.category }}</p>
       <p>Level: {{ quiz.level }}</p>

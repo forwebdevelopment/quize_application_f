@@ -3,10 +3,11 @@ import { Header } from "../header/header";
 import { Footer } from "../footer/footer";
 import { RouterOutlet } from "@angular/router";
 import { QuizFilter } from "../../feature/quiz-filter/quiz-filter";
+import { StartQuiz } from "../../feature/start-quiz/start-quiz";
 
 @Component({
   selector: 'app-layout',
-  imports: [Header, Footer, RouterOutlet, QuizFilter],
+  imports: [Header, Footer, RouterOutlet],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
