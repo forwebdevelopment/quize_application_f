@@ -4,6 +4,20 @@
     <p>{{ tagline }}</p>
   </header>
 
+  <!-- Category Selection -->
+  <section class="home-category">
+    <h2>Select Your Category</h2>
+    <div class="category-buttons">
+      <button (click)="selectCategory('tech')" class="btn btn-tech">
+        💻 Tech Quiz
+      </button>
+      <button (click)="selectCategory('non-tech')" class="btn btn-nontech">
+        📖 Non-Tech Quiz
+      </button>
+    </div>
+  </section>
+
+  <!-- Actions -->
   <section class="home-actions">
     <button routerLink="/quiz_filter" class="btn btn-primary">
       🎯 Choose Quiz
@@ -13,6 +27,7 @@
     </button>
   </section>
 
+  <!-- Info -->
   <section class="home-info">
     <h2>Features</h2>
     <ul>

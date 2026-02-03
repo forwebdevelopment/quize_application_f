@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   imports: [RouterLink],
@@ -9,5 +9,16 @@ import { RouterLink } from '@angular/router';
 export class Home {
  appTitle = 'Quiz Master';
   tagline = 'Test your knowledge, challenge yourself!';
+
+  constructor(private router: Router) {}
+
+  selectCategory(category: string) {
+    // Save category selection (could also use signals or a service)
+    sessionStorage.setItem('quizCategory', category);
+
+    // Redirect to quiz filter page with category context
+    this.router.navigate(['/quiz_filter']);
+  }
+
 
 }
