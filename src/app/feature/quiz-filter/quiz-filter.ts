@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ɵEmptyOutletComponent, RouterLink } from "@angular/router";
+import { Shared } from '../../shared/shared';
 
 @Component({
   selector: 'app-quiz-filter',
@@ -11,8 +12,13 @@ import { ɵEmptyOutletComponent, RouterLink } from "@angular/router";
   styleUrl: './quiz-filter.css',
 })
 export class QuizFilter {
+   sharedService = inject(Shared)
+   time:number=0
+  ngOnInit(){
+     this.sharedService.QuizFilter()
+  }
 
-  isTech:boolean = false
+isTech:boolean = false
  filters = {
     category: 'Select Category',
     level: 'non',
@@ -54,7 +60,15 @@ Category:any[]=["Tech" , "Non Tech"]
     this.isTech = this.filters.category=="Tech"?true:false
   }
 
+  enableTimer(){
+    this.sharedService.enableTimer();
 
+  }
+enterTime(){
+  debugger
+  this.filters.timePerQuestion = this.time.toString()
+  this.sharedService.Time.set(this.time)
+}
 
 
   filteredQuizzes = [...this.quizzes];

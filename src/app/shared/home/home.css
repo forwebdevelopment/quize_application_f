@@ -1,0 +1,75 @@
+.home-container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.home-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #3f51b5;
+}
+
+.home-header p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: #555;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.btn {
+  flex: 1 1 200px;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #f50057;
+  color: white;
+}
+
+.home-info {
+  margin-top: 2rem;
+  text-align: left;
+  padding: 1rem;
+}
+
+.home-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.home-info li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* 🔹 Responsive Breakpoints */
+@media (max-width: 768px) {
+  .home-actions {
+    flex-direction: column;
+  }
+
+  .home-info {
+    text-align: center;
+  }
+}

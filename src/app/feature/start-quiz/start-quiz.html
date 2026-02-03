@@ -1,8 +1,8 @@
 <div class="quiz-container">
   <div class="quiz-header">
-    <div class="header-item timer">⏱ {{ timer }}</div>
+   @if (isTimerEnable) {  <div class="header-item timer">⏱ {{ this.timer  }}</div>}
     <div class="header-item counter">Question {{ currentQuestion }}/{{ totalQuestions }}</div>
-    <div class="header-item total-time">Total Time: {{ totalTime }} minut</div>
+    @if (isTimerEnable) { <div class="header-item total-time">Total Time: {{ totalTime }} minut</div>}
   </div>
 
   <div class="question-block">

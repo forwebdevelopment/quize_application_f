@@ -37,7 +37,7 @@
      }
     <!-- Timer -->
     <label>
-      <input type="checkbox" [(ngModel)]="filters.useTimer" name="useTimer" />
+      <input type="checkbox" [(ngModel)]="filters.useTimer" (ngModelChange)="enableTimer()" name="useTimer" />
       Enable Timer
     </label>
 
@@ -45,9 +45,10 @@
       <label>Time per question:</label>
       <input
         type="text"
-        [(ngModel)]="filters.timePerQuestion"
+        [(ngModel)]="time"
+        (keyup)="enterTime()"
         name="timePerQuestion"
-        placeholder="e.g. 1 minute or 30 seconds"
+        placeholder="Enter time in minut "
       />
     </div>
 
