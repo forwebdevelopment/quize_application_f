@@ -1,1 +1,30 @@
-<p>results works!</p>
+<div class="scoreboard-container">
+  <h2 class="title">Your Quiz Results</h2>
+
+  <div class="score-summary">
+    <div class="summary-card">
+      <p class="label">Total Questions</p>
+      <p class="value">{{ totalQuestions }}</p>
+    </div>
+    <div class="summary-card">
+      <p class="label">Correct Answers</p>
+      <p class="value">{{ correctAnswers }}</p>
+    </div>
+    <div class="summary-card">
+      <p class="label">Score</p>
+      <p class="value">{{ score }}%</p>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <p>Progress</p>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="score"></div>
+    </div>
+  </div>
+
+  <!-- Review Answers Button -->
+  <div class="actions">
+    <button class="review-btn" (click)="reviewAnswers()">Review Answers</button>
+  </div>
+</div>

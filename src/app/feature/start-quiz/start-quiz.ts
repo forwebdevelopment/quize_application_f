@@ -78,6 +78,7 @@ totalMinut=0
 
   question = {
     text: 'Which is correct select query',
+    queNo:1,
     options: [
       'Select *from Table',
       'Select from Table',
@@ -90,6 +91,7 @@ totalMinut=0
   questions = [
      {
     text: 'Which is correct select query',
+    queNo:1,
     options: [
       'Select *from Table',
       'Select from Table',
@@ -99,6 +101,7 @@ totalMinut=0
   },
     {
     text: 'Which is correct select query',
+     queNo:2,
     options: [
       'Delete *from Table',
       'delete from Table',
@@ -109,6 +112,7 @@ totalMinut=0
 
   {
     text: 'Which is correct select query',
+     queNo:3,
     options: [
       'update *from Table',
       'update from Table',
@@ -119,6 +123,7 @@ totalMinut=0
 
   {
     text: 'Which is correct select query',
+    queNo:4,
     options: [
       'Insert into table value ()',
       'Insert into table  value',
@@ -134,13 +139,12 @@ totalMinut=0
 
 
 
-
-
   selectedOption: string | null = null;
 
 
 
-  selectOption(option: string) {
+  selectOption(option: string , quesNo:number) {
+    console.log(quesNo)
     this.selectedOption = option;
   }
 
@@ -159,6 +163,10 @@ totalMinut=0
         this.question = this.questions[this.currentQuestion-1]
       // Load previous question logic here
     }
+  }
+
+  existQuize(){
+    this.routs.navigate(['result'])
   }
 
 }

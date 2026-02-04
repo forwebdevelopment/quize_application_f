@@ -11,7 +11,7 @@
     <ul class="options-list">
       <li *ngFor="let option of question.options"
           [class.selected]="selectedOption === option"
-          (click)="selectOption(option)">
+          (click)="selectOption(option ,question.queNo)">
         {{ option }}
       </li>
     </ul>
@@ -19,6 +19,7 @@
 
   <div class="navigation-buttons">
     <button (click)="previousQuestion()">Previous</button>
+        <button (click)="existQuize()">Exit Quiz</button>
     <button (click)="nextQuestion()">Next</button>
   </div>
 </div>

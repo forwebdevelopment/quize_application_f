@@ -1,0 +1,76 @@
+.scoreboard-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.score-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.summary-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  flex: 1 1 120px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.label {
+  font-size: 14px;
+  color: #555;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.progress-section {
+  margin-top: 20px;
+}
+
+.progress-bar {
+  background: #ddd;
+  border-radius: 5px;
+  height: 15px;
+  width: 100%;
+}
+
+.progress {
+  background: #4caf50;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.review-btn {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.review-btn:hover {
+  background: #1976d2;
+}

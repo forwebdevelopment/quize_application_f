@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ɵEmptyOutletComponent, RouterLink } from "@angular/router";
+import { ɵEmptyOutletComponent, RouterLink, Router } from "@angular/router";
 import { Shared } from '../../shared/shared';
 
 @Component({
@@ -14,11 +14,7 @@ import { Shared } from '../../shared/shared';
 export class QuizFilter {
    sharedService = inject(Shared)
    time:number=0
-  ngOnInit(){
-     this.sharedService.QuizFilter()
-  }
-
-isTech:boolean = false
+   isTech:boolean = false
  filters = {
     category: 'Select Category',
     level: 'non',
@@ -26,6 +22,28 @@ isTech:boolean = false
     useTimer: false,
     timePerQuestion: ''
   };
+
+  constructor(private cd:ChangeDetectorRef , private routs:Router ){
+
+  }
+  ngOnInit(){
+     this.sharedService.QuizFilter()
+     this.filters.category = this.sharedService.Category()
+      debugger
+      if(this.filters.category!='non'){
+         this.filteredQuizzes = this.quizzes.filter(q => {
+      const matchCategory = this.filters.category ? q.category === this.filters.category : true;
+      return matchCategory;
+    })
+
+           this.isTech = this.filters.category=="Tech"?true:false
+ 
+      }
+     
+     this.cd.detectChanges()
+  }
+
+
 syllabus: { cat: string, value: string }[] = [
   // Non-Tech
   { cat: 'Non Tech', value: 'History' },

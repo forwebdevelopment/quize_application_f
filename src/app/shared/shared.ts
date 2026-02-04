@@ -7,6 +7,7 @@ import { Injectable , signal} from '@angular/core';
 export class Shared {
    isQuizFiltered = signal(false)
   isTimerEnable = signal(false)
+  Category = signal("non")
   Time = signal(0)
    QuizFilter(){
          this.isQuizFiltered.set(true)
