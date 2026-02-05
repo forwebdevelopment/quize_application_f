@@ -1,1 +1,59 @@
-<p>add-quiz works!</p>
+<div class="quiz-page" [formGroup]="quizForm">
+
+  <!-- Top Dropdowns -->
+  <div class="top-filters">
+    <select formControlName="category">
+      <option value="" disabled selected>Category</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+    </select>
+
+    <select formControlName="syllabus">
+      <option value="" disabled selected>Syllabus</option>
+      <option *ngFor="let syl of syllabi" [value]="syl">{{syl}}</option>
+    </select>
+
+    <select formControlName="subSubject">
+      <option value="" disabled selected>Sub Subject</option>
+      <option *ngFor="let sub of subSubjects" [value]="sub">{{sub}}</option>
+    </select>
+
+    <select formControlName="level">
+      <option value="" disabled selected>Level</option>
+      <option *ngFor="let lvl of levels" [value]="lvl">{{lvl}}</option>
+    </select>
+  </div>
+
+  <!-- Questions -->
+  <div formArrayName="questions">
+    <div *ngFor="let q of questions.controls; let i = index" [formGroupName]="i" class="quiz-form">
+
+      <!-- Delete Question Button -->
+      <div class="question-header">
+        <button type="button" class="delete-btn" (click)="deleteQuestion(i)">❌ Delete Question</button>
+      </div>
+
+      <textarea formControlName="questionText" placeholder="Enter Question Here"></textarea>
+
+      <div formArrayName="options" class="options">
+        <div *ngFor="let opt of options(i).controls; let j = index" [formGroupName]="j" class="option-row">
+          <input type="checkbox" formControlName="correct" />
+          <input type="text" formControlName="value" placeholder="Enter Option {{j+1}} value" />
+          <!-- Delete Option Button -->
+          <button type="button" class="delete-btn" (click)="deleteOption(i, j)">❌</button>
+        </div>
+      </div>
+
+      <button type="button" (click)="addOption(i )">+ Add Option</button>
+    </div>
+  </div>
+
+  <!-- Add Question -->
+  <div class="add-form-btn">
+    <button type="button" (click)="addQuestion()">+ Add Another Question</button>
+  </div>
+
+  <!-- Submit -->
+  <div class="submit-btn">
+    <button type="button" (click)="submitQuiz()">Add Quiz</button>
+  </div>
+</div>
