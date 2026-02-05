@@ -51,6 +51,7 @@ export class AddQuiz {
   }
 
   options(i: number): FormArray {
+  
     return this.questions.at(i).get('options') as FormArray;
   }
 

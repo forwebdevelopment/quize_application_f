@@ -90,7 +90,9 @@ button:hover {
   justify-content: flex-end;
   margin-bottom: 10px;
 }
-
+button:disabled {
+    background: gray;
+}
 @media (max-width: 768px) {
   .top-filters {
     flex-direction: column;

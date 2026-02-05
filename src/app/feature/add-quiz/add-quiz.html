@@ -37,13 +37,15 @@
       <div formArrayName="options" class="options">
         <div *ngFor="let opt of options(i).controls; let j = index" [formGroupName]="j" class="option-row">
           <input type="checkbox" formControlName="correct" />
-          <input type="text" formControlName="value" placeholder="Enter Option {{j+1}} value" />
+          <input type="text" formControlName="value"  placeholder="Enter Option {{j+1}} value" />
           <!-- Delete Option Button -->
           <button type="button" class="delete-btn" (click)="deleteOption(i, j)">❌</button>
         </div>
       </div>
 
-      <button type="button" (click)="addOption(i )">+ Add Option</button>
+      <button type="button"
+       [disabled]="options(i).length >= 4"
+       (click)="addOption(i )">+ Add Option</button>
     </div>
   </div>
 

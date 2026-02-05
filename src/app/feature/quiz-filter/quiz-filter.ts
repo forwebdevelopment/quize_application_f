@@ -67,7 +67,7 @@ syllabus: { cat: string, value: string }[] = [
     { title: 'Advanced SQL', category: 'Tech', level: 'Intermediat', syllabus: ['SQL'] },
     { title: 'Python for Data Science', category: 'Tech', level: 'Intermediat', syllabus: ['Python'] },
     { title: 'History', category: 'Non Tech', level: 'non', syllabus: ["History"] },
-      { title: 'General Knowledge', category: 'Non Tech', level: 'non', syllabus: ["General Knowledge"] }
+    { title: 'General Knowledge', category: 'Non Tech', level: 'non', syllabus: ["General Knowledge"] }
   ];
 
 Category:any[]=["Tech" , "Non Tech"]
