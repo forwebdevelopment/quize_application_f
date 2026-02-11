@@ -2,7 +2,15 @@
   <div class="logo">QuizApp</div>
   <nav class="nav-links" [class.open]="menuOpen">
     <a routerLink="/home" routerLinkActive="active">Home</a>
+    @if (shared.isLogin()) {
     <a routerLink="/add_quiz" routerLinkActive="active">Add Quizzes</a>
+    }
+    @if (!shared.isLogin()) {
+    <a routerLink="/login">Login</a>
+    }
+    @if (shared.isLogin()) {
+    <a (click)="Loginout()" routerLink="/home">Log Out</a>
+    }
     <a routerLink="/about" routerLinkActive="active">About</a>
   </nav>
   <button class="menu-toggle" (click)="toggleMenu()">☰</button>

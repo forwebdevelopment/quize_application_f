@@ -9,6 +9,8 @@ export class Shared {
   isTimerEnable = signal(false)
   Category = signal("non")
   Time = signal(0)
+
+  isLogin = signal(false)
    QuizFilter(){
          this.isQuizFiltered.set(true)
    }

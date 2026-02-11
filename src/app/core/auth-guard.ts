@@ -1,7 +1,9 @@
-import { CanActivateFn } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
 import { Shared } from './../shared/shared';
 import { inject } from '@angular/core';
-
+import { routes } from '../app.routes';
+import { Router } from '@angular/router';
+import {Cookie} from './cookie'
 
 export const authGuard: CanActivateFn = (route, state) => {
  const shareService = inject(Shared)
@@ -14,3 +16,15 @@ export const authGuard: CanActivateFn = (route, state) => {
  }
 
 };
+
+
+export const IsLogin:CanActivateFn = (route:ActivatedRouteSnapshot , state:RouterStateSnapshot)=>{
+     const cookie  = inject(Cookie)
+     const router = inject(Router)
+    if(cookie.getCookie()){
+        return true;
+    }else {
+       return   router.createUrlTree(['/login'] , {queryParams:{returnUrl:state.url}})
+       // return false
+    }
+}

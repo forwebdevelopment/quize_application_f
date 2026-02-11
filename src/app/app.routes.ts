@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { QuizFilter } from './feature/quiz-filter/quiz-filter';
 import { StartQuiz } from './feature/start-quiz/start-quiz';
-import { authGuard } from './core/auth-guard';
+import { authGuard, IsLogin } from './core/auth-guard';
 import { Results } from './feature/results/results';
 import { Home } from './shared/home/home';
 import { AddQuiz } from './feature/add-quiz/add-quiz';
+import { Login } from './feature/AuthFolder/login/login';
 
 export const routes: Routes = [
 
@@ -13,5 +14,6 @@ export const routes: Routes = [
     {path:'quiz_filter' ,component:QuizFilter},
     {path:'quiz_start' ,component:StartQuiz , canActivate:[authGuard]},
     {path:'result',component:Results},
-    {path:'add_quiz',component:AddQuiz}
+    {path:'add_quiz',component:AddQuiz , canActivate:[IsLogin]},
+    {path:'login' , component:Login}
 ];
