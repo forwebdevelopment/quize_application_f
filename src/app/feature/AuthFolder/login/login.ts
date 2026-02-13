@@ -26,9 +26,9 @@ export class Login {
 
   onLogin(){
 
-  //this.loaderService.show();
+  this.loaderService.show();
    this.api.loginApi(this.email , this.password).subscribe((val:any)=>{
-  //  this.loaderService.hide();
+   this.loaderService.hide();
          this._shared.isLogin.set(val.data)
         this.cookie.setCookie(val)
    const url = this.activeRoute.snapshot.queryParamMap.get('returnUrl')

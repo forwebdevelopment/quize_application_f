@@ -30,10 +30,10 @@ export class Layout {
 
 
     TenantData(){
-         //  this.loaderService.show();
+           this.loaderService.show();
       this.api.TenantApi().subscribe({next:(val:any)=>{
         debugger
-      //  this.loaderService.hide()
+      this.loaderService.hide()
         console.log(val)
      this._shared.TenantData.set(val.data)
 

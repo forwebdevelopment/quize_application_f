@@ -1,10 +1,11 @@
-import { Component  } from '@angular/core';
+import { Component, inject  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Shared } from '../../shared/shared';
 import { Api } from '../../core/api';
+import { LoaderService } from '../../core/loader';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { Api } from '../../core/api';
 export class AddQuiz {
 
  quizForm: FormGroup;
-
+  private loaderService = inject(LoaderService);
   categories = ['Math', 'Science', 'History'];
   syllabi = ['CBSE', 'ICSE', 'State Board'];
   subSubjects = ['Algebra', 'Geometry', 'Physics'];
@@ -83,12 +84,13 @@ export class AddQuiz {
   // Submit
   submitQuiz() {
     console.log('Quiz Data:', this.quizForm.value);
-
+    this.loaderService.show();
     this.api.AddQuiz(this.quizForm.value).subscribe({next:(val:any)=>{
-
+      this.loaderService.hide()
       console.log(val)
     },error:(err:any)=>{
       console.log(err)
+       this.loaderService.hide()
     }})
     
     // TODO: send to backend service

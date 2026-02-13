@@ -4,11 +4,11 @@ import {LoaderService} from '../core/loader'
 import { inject } from '@angular/core';
 export const interceptorInterceptor: HttpInterceptorFn = (req, next): Observable<HttpEvent<any>>=> {
  const servics = inject(LoaderService)
-      servics.show()
+      //servics.show()
  
   return next(req).pipe(catchError((error:HttpErrorResponse)=>{
 
-    servics.hide()
+   // servics.hide()
     let errorMsg = "";
     if(error.error instanceof ErrorEvent){
       errorMsg = `Client Error : ${error.error.message}`
