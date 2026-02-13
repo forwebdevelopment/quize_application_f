@@ -1,0 +1,37 @@
+<!-- terms-of-service.component.html -->
+<div class="legal-container">
+  <h1>Terms of Service</h1>
+  <p><em>Effective Date: January 1, 2026</em></p>
+
+  <section class="legal-section">
+    <h2 (click)="toggleSection('responsibilities')">User Responsibilities</h2>
+    <div *ngIf="openSection === 'responsibilities'">
+      <ul>
+        <li>Provide accurate account information</li>
+        <li>Use platform for personal purposes only</li>
+        <li>Respect intellectual property</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="legal-section">
+    <h2 (click)="toggleSection('rules')">Platform Rules</h2>
+    <div *ngIf="openSection === 'rules'">
+      <ul>
+        <li>Quizzes are for education and entertainment</li>
+        <li>No hacking, cheating, or disruption</li>
+        <li>Accounts may be suspended for violations</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="legal-section">
+    <h2 (click)="toggleSection('liability')">Limitation of Liability</h2>
+    <div *ngIf="openSection === 'liability'">
+      <ul>
+        <li>Not responsible for technical issues beyond control</li>
+        <li>Scores are not official certifications</li>
+      </ul>
+    </div>
+  </section>
+</div>

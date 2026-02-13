@@ -7,6 +7,8 @@ import { Home } from './shared/home/home';
 import { AddQuiz } from './feature/add-quiz/add-quiz';
 import { Login } from './feature/AuthFolder/login/login';
 import { About } from './feature/about/about';
+import { TermsOfService } from './feature/terms-of-service/terms-of-service';
+import { PrivacyPolicy } from './feature/privacy-policy/privacy-policy';
 
 export const routes: Routes = [
 
@@ -17,5 +19,7 @@ export const routes: Routes = [
     {path:'result',component:Results},
     {path:'add_quiz',component:AddQuiz , canActivate:[IsLogin]},
     {path:'login' , component:Login},
-    {path:'about',component:About}
+    {path:'about',component:About},
+    {path:'termsOfservice',component:TermsOfService},
+    {path:'privacypolicy' ,component:PrivacyPolicy}
 ];

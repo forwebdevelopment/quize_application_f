@@ -1,0 +1,43 @@
+<!-- privacy-policy.component.html -->
+<div class="legal-container">
+  <h1>Privacy Policy</h1>
+  <p><em>Effective Date: January 1, 2026</em></p>
+
+  <section class="legal-section">
+    <h2 (click)="toggleSection('info')">Information We Collect</h2>
+    @if (openSection === 'info') {
+    <div >
+      <ul>
+        <li>Account Data: Email, username, login credentials</li>
+        <li>Usage Data: Quiz scores, progress tracking</li>
+        <li>Technical Data: Device type, browser, cookies</li>
+      </ul>
+    </div>
+}
+  </section>
+
+  <section class="legal-section">
+    <h2 (click)="toggleSection('use')">How We Use Your Information</h2>
+    @if (openSection === 'use') {
+    <div >
+      <ul>
+        <li>Provide secure access to quizzes</li>
+        <li>Track progress and personalize experience</li>
+        <li>Improve platform performance</li>
+      </ul>
+    </div>
+}
+  </section>
+
+  <section class="legal-section">
+    <h2 (click)="toggleSection('rights')">Your Rights</h2>
+    @if (openSection === 'rights') {
+    <div>
+      <ul>
+        <li>Request access, correction, or deletion of data</li>
+        <li>Opt out of non-essential cookies</li>
+      </ul>
+    </div>
+}
+  </section>
+</div>
