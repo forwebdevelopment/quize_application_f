@@ -3,12 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { Shared } from '../shared';
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
- appTitle = 'Quiz Master';
+ appTitle = 'Quiz challenger';
   tagline = 'Test your knowledge, challenge yourself!';
 
   constructor(private router: Router , private _shared:Shared) {}
