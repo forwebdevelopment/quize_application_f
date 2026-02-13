@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Shared } from '../../shared/shared';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AddQuiz {
   subSubjects = ['Algebra', 'Geometry', 'Physics'];
   levels = ['Easy', 'Medium', 'Hard'];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder , public _shared:Shared) {
     this.quizForm = this.fb.group({
       category: ['', Validators.required],
       syllabus: ['', Validators.required],

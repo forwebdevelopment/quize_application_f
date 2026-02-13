@@ -4,22 +4,31 @@
   <div class="top-filters">
     <select formControlName="category">
       <option value="" disabled selected>Category</option>
-      <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+      @for (item of _shared.TenantData()?.categories; track $index) {
+              <option  [value]="item.catId">{{item.catName}}</option>
+      }
+     
     </select>
 
     <select formControlName="syllabus">
       <option value="" disabled selected>Syllabus</option>
-      <option *ngFor="let syl of syllabi" [value]="syl">{{syl}}</option>
+      @for (item of _shared.TenantData()?.subjects; track $index) {
+              <option  [value]="item.subjectId">{{item.subject_Name}}</option>
+      }
     </select>
 
-    <select formControlName="subSubject">
+    <!-- <select formControlName="subSubject">
       <option value="" disabled selected>Sub Subject</option>
       <option *ngFor="let sub of subSubjects" [value]="sub">{{sub}}</option>
-    </select>
+    </select> -->
 
     <select formControlName="level">
       <option value="" disabled selected>Level</option>
-      <option *ngFor="let lvl of levels" [value]="lvl">{{lvl}}</option>
+     @for (item of _shared.TenantData()?.levels; track $index) {
+         @if (item.levelName!='non') {
+              <option  [value]="item.levelId">{{item.levelName}}</option>
+         }
+      }
     </select>
   </div>
 

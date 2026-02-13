@@ -12,7 +12,7 @@ export interface Level {
 export interface Subject {
   subject_Name: string;
   subjectId: number;
-  catId: string;
+  catname: string;
 }
 
 export interface TenantData {

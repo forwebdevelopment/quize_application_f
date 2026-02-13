@@ -5,9 +5,10 @@
     <!-- Category -->
     <label>Category:</label>
     <select [(ngModel)]="filters.category" name="category" (ngModelChange)="onChangeCateory()">
-        @for (item of Category; track $index) 
+        <option disabled>Select Category</option>
+        @for (item of this.sharedService.TenantData()?.categories; track $index) 
         {
-          <option>{{item}}</option>
+          <option [value]="item.catName">{{item.catName}}</option>
         }
       
     </select>
@@ -17,9 +18,15 @@
         @if (isTech) {
     <label>Level:</label>
     <select [(ngModel)]="filters.level" name="level">
-      <option value="Beginar">Beginar</option>
-      <option value="Intermediat">Intermediat</option>
-      <option value="Advance">Advance</option>
+       <option disabled>Select Level</option>
+      @for (item of  this.sharedService.TenantData()?.levels; track $index) {
+         @if (item.levelName!='non') {
+       <option [value]="item.levelName">{{item.levelName}}</option>
+         }
+      }
+   
+   
+      <!-- <option value="Advance">Advance</option> -->
     </select>
 }
  
@@ -28,9 +35,10 @@
      @if (filters.category!='Select Category') {
     <label>Syllabus:</label>
     <select [(ngModel)]="filters.syllabus" name="syllabus">
-        @for (item of syllabus; track $index) {
-           @if (item.cat==filters.category) {
-           <option [value]="item.value">{{item.value}}</option>
+      <option disabled>Select Syllabus</option>
+        @for (item of this.sharedService.TenantData()?.subjects; track $index) {
+           @if (item.catname==filters.category) {
+           <option [value]="item.subject_Name">{{item.subject_Name}}</option>
            }
         }
     </select>

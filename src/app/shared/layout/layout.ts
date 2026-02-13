@@ -2,22 +2,22 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Header } from "../header/header";
 import { Footer } from "../footer/footer";
 import { RouterOutlet } from "@angular/router";
-import { QuizFilter } from "../../feature/quiz-filter/quiz-filter";
-import { StartQuiz } from "../../feature/start-quiz/start-quiz";
-import { Home } from "../home/home";
 import { Loader } from "../loader/loader";
 import { LoaderService } from '../../core/loader';
+import { Api } from '../../core/api';
+import { Shared } from '../shared';
 
 @Component({
   selector: 'app-layout',
-  imports: [Header, Footer, RouterOutlet, Home, Loader],
+  imports: [Header, Footer, RouterOutlet,  Loader],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
 export class Layout {
  isLoading = false;
 
-  constructor(private loaderService: LoaderService , private cd:ChangeDetectorRef) {}
+
+  constructor(private loaderService: LoaderService , private cd:ChangeDetectorRef , private api:Api , private _shared:Shared) {}
 
   ngOnInit() {
     this.loaderService.loading$.subscribe(state => {
@@ -25,6 +25,29 @@ export class Layout {
       this.isLoading = state;
        this.cd.detectChanges();
     });
+   this.TenantData()
   }
+
+
+    TenantData(){
+           this.loaderService.show();
+      this.api.TenantApi().subscribe({next:(val:any)=>{
+        debugger
+        this.loaderService.hide()
+        console.log(val)
+     this._shared.TenantData.set(val.data)
+
+     console.log(this._shared.TenantData())
+     this.cd.detectChanges()
+
+      },
+      error:(err:any)=>{
+        console.log(err)
+      }
+    }
+     
+    )
+
+    }
 
 }

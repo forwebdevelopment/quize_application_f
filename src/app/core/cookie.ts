@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { Shared } from "../shared/shared";
 
 @Injectable({
     providedIn:'root'
@@ -6,7 +7,7 @@ import { Injectable } from "@angular/core";
 
 
 export class Cookie{
-
+   _shared = inject(Shared)
 
 
     getCookie(){
@@ -15,6 +16,7 @@ export class Cookie{
     let  istrue = data? data.time > Date.now()?true:false:false ;
 
      if(istrue){
+      this._shared.isLogin.set(true)
         return true
      }else{
         return false;
