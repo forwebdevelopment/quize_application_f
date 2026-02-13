@@ -7,7 +7,7 @@ import { Shared } from '../shared';
   styleUrl: './home.css',
 })
 export class Home {
- appTitle = 'Quiz challenger';
+ appTitle = 'Quiz Challenger';
   tagline = 'Test your knowledge, challenge yourself!';
 
   constructor(private router: Router , private _shared:Shared) {}
