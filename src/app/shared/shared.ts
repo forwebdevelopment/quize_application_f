@@ -7,7 +7,7 @@ import { TenantData } from '../models/models';
   providedIn: 'root',
 })
 export class Shared {
-   isQuizFiltered = signal(false)
+  isQuizFiltered = signal(false)
   isTimerEnable = signal(false)
   Category = signal("non")
   Time = signal(0)
@@ -16,7 +16,7 @@ export class Shared {
     levels:[],
     subjects:[]
   })
-  
+
   isLogin = signal(false)
    QuizFilter(){
          this.isQuizFiltered.set(true)

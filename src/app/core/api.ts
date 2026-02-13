@@ -31,4 +31,9 @@ export class Api{
 
         return this.http.get<TenantDataResponse>(url)
     }
+
+    AddQuiz(data:any){
+        const url = `${this.apiUrl}Quiz`
+        return this.http.post(url,data)
+    }
 }

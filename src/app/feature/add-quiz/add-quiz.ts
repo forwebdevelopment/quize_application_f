@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Shared } from '../../shared/shared';
+import { Api } from '../../core/api';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Shared } from '../../shared/shared';
   styleUrl: './add-quiz.css',
 })
 export class AddQuiz {
+
  quizForm: FormGroup;
 
   categories = ['Math', 'Science', 'History'];
@@ -20,7 +22,7 @@ export class AddQuiz {
   subSubjects = ['Algebra', 'Geometry', 'Physics'];
   levels = ['Easy', 'Medium', 'Hard'];
 
-  constructor(private fb: FormBuilder , public _shared:Shared) {
+  constructor(private fb: FormBuilder , public _shared:Shared , private api:Api) {
     this.quizForm = this.fb.group({
       category: ['', Validators.required],
       syllabus: ['', Validators.required],
@@ -81,6 +83,14 @@ export class AddQuiz {
   // Submit
   submitQuiz() {
     console.log('Quiz Data:', this.quizForm.value);
+
+    this.api.AddQuiz(this.quizForm.value).subscribe({next:(val:any)=>{
+
+      console.log(val)
+    },error:(err:any)=>{
+      console.log(err)
+    }})
+    
     // TODO: send to backend service
   }
 
