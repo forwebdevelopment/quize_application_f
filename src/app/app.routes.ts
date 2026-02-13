@@ -6,6 +6,7 @@ import { Results } from './feature/results/results';
 import { Home } from './shared/home/home';
 import { AddQuiz } from './feature/add-quiz/add-quiz';
 import { Login } from './feature/AuthFolder/login/login';
+import { About } from './feature/about/about';
 
 export const routes: Routes = [
 
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path:'quiz_start' ,component:StartQuiz , canActivate:[authGuard]},
     {path:'result',component:Results},
     {path:'add_quiz',component:AddQuiz , canActivate:[IsLogin]},
-    {path:'login' , component:Login}
+    {path:'login' , component:Login},
+    {path:'about',component:About}
 ];
