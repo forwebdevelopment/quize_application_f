@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Shared } from '../../shared/shared';
 import { Api } from '../../core/api';
 import { LoaderService } from '../../core/loader';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-quiz',
@@ -16,6 +16,7 @@ import { LoaderService } from '../../core/loader';
 })
 export class AddQuiz {
 
+  toast:any = inject(ToastrService);
  quizForm: FormGroup;
   private loaderService = inject(LoaderService);
   categories = ['Math', 'Science', 'History'];
@@ -48,6 +49,11 @@ export class AddQuiz {
       correct: [false]
     });
   }
+
+
+
+
+
 
   // Getters
   get questions(): FormArray {
@@ -87,14 +93,36 @@ export class AddQuiz {
     this.loaderService.show();
     this.api.AddQuiz(this.quizForm.value).subscribe({next:(val:any)=>{
       this.loaderService.hide()
+      if(val.statusCode==200){
+      this.toast.success('Quiz Added Succussfully');
+      }else{
+        this.toast.error("Sumthing Error : Retry");
+        
+      }
       console.log(val)
     },error:(err:any)=>{
       console.log(err)
        this.loaderService.hide()
     }})
     
-    // TODO: send to backend service
+
   }
 
 
+
+
+  onCorrectChange(qIndex:number, changedIdx:number){
+
+    const optsFA = this.options(qIndex); // formArray
+    const changed = optsFA.at(changedIdx).get('correct')?.value;
+
+    if(changed){
+      //if one becomes true , set all othors to false
+      optsFA.controls.forEach((ctrl:any,idx:any)=>{
+        if(idx != changedIdx){
+          ctrl.get('correct')?.setValue(false ,{emitEvent:false})
+        }
+      })
+    }
+  }
 }

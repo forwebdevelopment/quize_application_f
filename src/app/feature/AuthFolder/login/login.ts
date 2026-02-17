@@ -6,6 +6,7 @@ import { Cookie } from '../../../core/cookie';
 import { share } from 'rxjs';
 import { Shared } from '../../../shared/shared';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   imports: [FormsModule],
@@ -16,6 +17,7 @@ export class Login {
 
   private api = inject(Api)
   private loaderService = inject(LoaderService) ;
+    toastr:any = inject(ToastrService);
   private cookie = inject(Cookie);
   private _shared = inject(Shared)
   private router = inject(Router)
@@ -31,10 +33,16 @@ export class Login {
    this.loaderService.hide();
          this._shared.isLogin.set(val.data)
         this.cookie.setCookie(val)
-   const url = this.activeRoute.snapshot.queryParamMap.get('returnUrl')
-   debugger
-   console.log(url)
+        if(val.message.includes('failed')){
+           this.toastr.error(val.message);
+           
+        }else{
+          this.toastr.success(val.message);
+          const url = this.activeRoute.snapshot.queryParamMap.get('returnUrl')
           url?this.router.navigate([url]):this.router.navigate(['/home'])
+        }
+      
+
        
    })
 

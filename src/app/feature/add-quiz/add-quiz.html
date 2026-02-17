@@ -45,7 +45,7 @@
 
       <div formArrayName="options" class="options">
         <div *ngFor="let opt of options(i).controls; let j = index" [formGroupName]="j" class="option-row">
-          <input type="checkbox" formControlName="correct" />
+          <input type="checkbox" formControlName="correct"  (change)="onCorrectChange(i, j)" />
           <input type="text" formControlName="value"  placeholder="Enter Option {{j+1}} value" />
           <!-- Delete Option Button -->
           <button type="button" class="delete-btn" (click)="deleteOption(i, j)">❌</button>
