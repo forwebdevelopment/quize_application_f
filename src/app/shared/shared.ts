@@ -14,7 +14,8 @@ export class Shared {
   TenantData = signal<TenantData|null>({
     categories:[],
     levels:[],
-    subjects:[]
+    subjects:[],
+    card:[]
   })
 
   isLogin = signal(false)
