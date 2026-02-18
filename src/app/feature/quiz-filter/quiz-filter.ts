@@ -18,12 +18,14 @@ export class QuizFilter {
    isTech:boolean = false
    syllabus: Subject[]=[]
    level:Level[]=[]
+  numberOfQuestions:number = 25
  filters = {
     category: 'Select Category',
     level: 'Select Level',
     syllabus: 'Select Syllabus',
     useTimer: false,
-    timePerQuestion: ''
+    timePerQuestion: '',
+  
   };
 
  
@@ -33,17 +35,12 @@ export class QuizFilter {
   }
   ngOnInit(){
     debugger
+
+    
+
      this.sharedService.QuizFilter()
      this.filters.category = this.sharedService.Category()
-      if(this.filters.category!='non'){
-         this.filteredQuizzes = this.quizzes.filter(q => {
-      const matchCategory = this.filters.category ? q.category === this.filters.category : true;
-      return matchCategory;
-    })
-
-           this.isTech = this.filters.category=="Tech"?true:false
-         this.cd.detectChanges()
-      }
+     this.onChangeCateory()
 
   }
 
@@ -61,12 +58,27 @@ export class QuizFilter {
 
 
   onChangeCateory(){
-    debugger
-     this.filteredQuizzes = this.quizzes.filter(q => {
-      const matchCategory = this.filters.category ? q.category === this.filters.category : true;
-      return matchCategory;
-    })
-    this.isTech = this.filters.category=="Tech"?true:false
+    if(this.filters.category!='Select Category'){
+      this.sharedService.Category.set(this.filters.category)
+    }
+    var tenantdata:any= this.sharedService.TenantData();
+    tenantdata.card= this.sharedService.CardData()
+    this.sharedService.TenantData.set(tenantdata)
+    
+     if(this.filters.category!='non'){
+
+     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.catName==this.sharedService.Category())
+     this.sharedService.TenantData.set(tenantdata) 
+
+         this.isTech = this.filters.category=="Tech"?true:false
+         this.cd.detectChanges()
+      }else{
+         var tenantdata:any= this.sharedService.TenantData();
+     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.catName!=this.sharedService.Category())
+     this.sharedService.TenantData.set(tenantdata) 
+        this.isTech = this.sharedService.Category()=="Tech"
+         this.cd.detectChanges()
+      }
   }
 
   enableTimer(){
@@ -80,16 +92,45 @@ enterTime(){
 }
 
 
+  onChangeLevel(){
+    if(this.filters.category!='Select Level'){
+     // this.sharedService.Category.set(this.filters.category)
+    }
+    var tenantdata:any= this.sharedService.TenantData();
+    tenantdata.card= this.sharedService.CardData()
+     this.sharedService.TenantData.set(tenantdata)
+     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.levelName==this.filters.level)
+     this.sharedService.TenantData.set(tenantdata) 
+   
+  }
+
+
+
+
+  onChangeSyllabus(){
+
+     var tenantdata:any= this.sharedService.TenantData();
+     tenantdata.card= this.sharedService.CardData()
+     this.sharedService.TenantData.set(tenantdata)
+     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=> c.heading.includes(this.filters.syllabus))
+     this.sharedService.TenantData.set(tenantdata) 
+
+  }
+
+
+
+
   filteredQuizzes = [...this.quizzes];
 
   applyFilters() {
     debugger
-    this.filteredQuizzes = this.quizzes.filter(q => {
-      const matchCategory = this.filters.category ? q.category === this.filters.category : true;
-      const matchLevel = this.filters.level ? q.level === this.filters.level : q.level=='non'?true:false;
-      const matchSyllabus = this.filters.syllabus ? q.syllabus.includes(this.filters.syllabus) : true;
-      return matchCategory && matchLevel && matchSyllabus;
-    });
+
+    // this.filteredQuizzes = this.quizzes.filter(q => {
+    //   const matchCategory = this.filters.category ? q.category === this.filters.category : true;
+    //   const matchLevel = this.filters.level ? q.level === this.filters.level : q.level=='non'?true:false;
+    //   const matchSyllabus = this.filters.syllabus ? q.syllabus.includes(this.filters.syllabus) : true;
+    //   return matchCategory && matchLevel && matchSyllabus;
+    // });
   }
 
 }

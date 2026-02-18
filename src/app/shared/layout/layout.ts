@@ -32,14 +32,12 @@ export class Layout {
 
 
     TenantData(){
+      
            this.loaderService.show();
       this.api.TenantApi().subscribe({next:(val:any)=>{
-        debugger
       this.loaderService.hide()
-        console.log(val)
      this._shared.TenantData.set(val.data)
-
-     console.log(this._shared.TenantData())
+      this._shared.CardData.set(val.data.card)
      this.cd.detectChanges()
 
       },

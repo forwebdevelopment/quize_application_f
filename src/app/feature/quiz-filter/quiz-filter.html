@@ -17,7 +17,7 @@
 
         @if (isTech) {
     <label>Level:</label>
-    <select [(ngModel)]="filters.level" name="level">
+    <select [(ngModel)]="filters.level" name="level" (change)="onChangeLevel()">
        <option disabled>Select Level</option>
       @for (item of  this.sharedService.TenantData()?.levels; track $index) {
          @if (item.levelName!='non') {
@@ -34,7 +34,7 @@
     <!-- Syllabus -->
      @if (filters.category!='Select Category') {
     <label>Syllabus:</label>
-    <select [(ngModel)]="filters.syllabus" name="syllabus">
+    <select [(ngModel)]="filters.syllabus" name="syllabus" (change)="onChangeSyllabus()">
       <option disabled>Select Syllabus</option>
         @for (item of this.sharedService.TenantData()?.subjects; track $index) {
            @if (item.catname==filters.category) {
@@ -43,14 +43,24 @@
         }
     </select>
      }
-    <!-- Timer -->
-    <label>
+
+
+    <label>Number of quiz</label>
+     <select [(ngModel)]="numberOfQuestions" name="numberOfQuestions">
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+     </select>
+
+
+
+     <label>
       <input type="checkbox" [(ngModel)]="filters.useTimer" (ngModelChange)="enableTimer()" name="useTimer" />
       Enable Timer
     </label>
 
     <div *ngIf="filters.useTimer">
-      <label>Time per question:</label>
+      <label>Time :</label>
       <input
         type="text"
         [(ngModel)]="time"
@@ -59,18 +69,23 @@
         placeholder="Enter time in minut "
       />
     </div>
-
     <button (click)="applyFilters()">Apply Filters</button>
   </aside>
 
+
   <section class="quiz-results">
     <h3>Filtered Quizzes</h3>
-    <div *ngFor="let quiz of filteredQuizzes" class="quiz-card" routerLink="/quiz_start">
-      <h4>{{ quiz.title }}</h4>
-      <p>Category: {{ quiz.category }}</p>
-      <p>Level: {{ quiz.level }}</p>
-      <p>Syllabus: {{ quiz.syllabus.join(', ') }}</p>
-      <p *ngIf="filters.useTimer">Timer: {{ filters.timePerQuestion }}</p>
+
+   @for (quiz of this.sharedService.TenantData()?.card; track $index) {
+    <div class="quiz-card" routerLink="/quiz_start">
+      <h4>{{ quiz.heading }}</h4>
+      <p>Category: {{ quiz.catName }}</p>
+      <p>Level: {{ quiz.levelName }}</p>
+      <p>Number of Questions: {{ numberOfQuestions }}</p>
+       @if (filters.useTimer) {
+      <p >Timer: {{ filters.timePerQuestion }}</p>
+       }
     </div>
+  }
   </section>
 </div>

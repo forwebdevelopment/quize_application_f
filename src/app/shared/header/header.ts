@@ -27,4 +27,7 @@ export class Header {
       this.cookie.logout()
       this.route.navigate(['/home'])
   }
+
+
+  
 }

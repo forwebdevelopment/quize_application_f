@@ -30,6 +30,6 @@ export interface TenantDataResponse {
 
 export interface Card{
   heading:string;
-  catname:string;
-  levelname:string;
+  catName:string;
+  levelName:string;
 }

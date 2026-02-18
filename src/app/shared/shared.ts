@@ -18,6 +18,8 @@ export class Shared {
     card:[]
   })
 
+  CardData = signal<any>(null)
+
   isLogin = signal(false)
    QuizFilter(){
          this.isQuizFiltered.set(true)
