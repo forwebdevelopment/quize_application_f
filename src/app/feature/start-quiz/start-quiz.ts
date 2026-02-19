@@ -31,8 +31,7 @@ export class StartQuiz {
 
 
   ngOnInit(){
-    alert("start quiz")
-    debugger
+
 this.questions=[]
     this.sharedService.QuizResponse()?.data.forEach((element:any) => {
      
