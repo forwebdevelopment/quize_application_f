@@ -32,4 +32,5 @@ export interface Card{
   heading:string;
   catName:string;
   levelName:string;
+  subject:string;
 }

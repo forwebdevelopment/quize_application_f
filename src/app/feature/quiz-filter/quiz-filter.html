@@ -75,17 +75,18 @@
 
   <section class="quiz-results">
     <h3>Filtered Quizzes</h3>
-
-   @for (quiz of this.sharedService.TenantData()?.card; track $index) {
-    <div class="quiz-card" routerLink="/quiz_start">
-      <h4>{{ quiz.heading }}</h4>
-      <p>Category: {{ quiz.catName }}</p>
-      <p>Level: {{ quiz.levelName }}</p>
-      <p>Number of Questions: {{ numberOfQuestions }}</p>
-       @if (filters.useTimer) {
-      <p >Timer: {{ filters.timePerQuestion }}</p>
-       }
+    <div class="quiz-main">
+      @for (quiz of this.sharedService.TenantData()?.card; track $index) {
+       <div class="quiz-card" routerLink="/quiz_start">
+         <h4>{{ quiz.heading }}</h4>
+         <p>Category: {{ quiz.catName }}</p>
+         <p>Level: {{ quiz.levelName }}</p>
+         <p>Number of Questions: {{ numberOfQuestions }}</p>
+          @if (filters.useTimer) {
+         <p >Timer: {{ filters.timePerQuestion }}</p>
+          }
+       </div>
+     }
     </div>
-  }
   </section>
 </div>

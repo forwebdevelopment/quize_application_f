@@ -61,6 +61,9 @@ export class QuizFilter {
     if(this.filters.category!='Select Category'){
       this.sharedService.Category.set(this.filters.category)
     }
+
+    this.filters.level = 'Select Level'
+    this.filters.syllabus = 'Select Syllabus'
     var tenantdata:any= this.sharedService.TenantData();
     tenantdata.card= this.sharedService.CardData()
     this.sharedService.TenantData.set(tenantdata)
@@ -99,7 +102,7 @@ enterTime(){
     var tenantdata:any= this.sharedService.TenantData();
     tenantdata.card= this.sharedService.CardData()
      this.sharedService.TenantData.set(tenantdata)
-     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.levelName==this.filters.level)
+     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.levelName==this.filters.level && (c.subject.toLocaleLowerCase()==this.filters.syllabus.toLocaleLowerCase() || this.filters.syllabus=='Select Syllabus'))  
      this.sharedService.TenantData.set(tenantdata) 
    
   }
@@ -109,10 +112,13 @@ enterTime(){
 
   onChangeSyllabus(){
 
+    debugger
      var tenantdata:any= this.sharedService.TenantData();
      tenantdata.card= this.sharedService.CardData()
      this.sharedService.TenantData.set(tenantdata)
-     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=> c.heading.includes(this.filters.syllabus))
+     debugger
+     tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.subject.toLocaleLowerCase()==this.filters.syllabus.toLocaleLowerCase()&&
+      (c.levelName.toLocaleLowerCase()==this.filters.level.toLocaleLowerCase() || this.filters.level=='Select Category'))
      this.sharedService.TenantData.set(tenantdata) 
 
   }
