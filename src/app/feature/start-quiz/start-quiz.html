@@ -19,7 +19,15 @@
 
   <div class="navigation-buttons">
     <button (click)="previousQuestion()">Previous</button>
-        <button (click)="existQuize()">Exit Quiz</button>
-    <button (click)="nextQuestion()">Next</button>
+
+    @if ( this.totalQuestions!=this.currentQuestion) {
+        <button (click)="submitQuiz()">Exit Quiz</button>
+    }
+    @if ( this.totalQuestions==this.currentQuestion) {
+        <button (click)="submitQuiz()">Submit Quiz</button>
+    }@else{
+        <button (click)="nextQuestion()">Next</button>
+      }
+   
   </div>
 </div>

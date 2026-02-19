@@ -22,12 +22,30 @@ export class StartQuiz {
    minut:number = 0;
    hour:number = 0;
   timer = '00:00:00';
+  questions:any[] = []
+  question:any
+  selectedOption: string | null = null;
+
 
   isTimerEnable:boolean = this.sharedService.isTimerEnable()
 
 
   ngOnInit(){
+    alert("start quiz")
     debugger
+this.questions=[]
+    this.sharedService.QuizResponse()?.data.forEach((element:any) => {
+     
+      this.questions.push({
+        text: element.question,
+        queNo: element.questionId,
+        options: [element.option1 , element.option2 , element.option3 , element.option4]
+      })
+    }
+    );
+    this.totalQuestions = this.questions.length
+
+    this.question=this.questions[0]
     if(this.isTimerEnable){
       this.totalTime = this.sharedService.Time();
       this.startTime()
@@ -74,75 +92,6 @@ totalMinut=0
   }
 
 
-
-
-  question = {
-    text: 'Which is correct select query',
-    queNo:1,
-    options: [
-      'Select *from Table',
-      'Select from Table',
-      'Select **from Table',
-      'Select  *form Table'
-    ]
-  };
-
-
-  questions = [
-     {
-    text: 'Which is correct select query',
-    queNo:1,
-    options: [
-      'Select *from Table',
-      'Select from Table',
-      'Select **from Table',
-      'Select  *form Table'
-    ]
-  },
-    {
-    text: 'Which is correct select query',
-     queNo:2,
-    options: [
-      'Delete *from Table',
-      'delete from Table',
-      'Delet **from Table',
-      'delete  *form Table'
-    ]
-  },
-
-  {
-    text: 'Which is correct select query',
-     queNo:3,
-    options: [
-      'update *from Table',
-      'update from Table',
-      'update  Table set name ="krishna"',
-      'update  *form Table'
-    ]
-  },
-
-  {
-    text: 'Which is correct select query',
-    queNo:4,
-    options: [
-      'Insert into table value ()',
-      'Insert into table  value',
-      'insert into table ',
-      'insert into (column name) value'
-    ]
-  }
-];
-
-
-
-
-
-
-
-  selectedOption: string | null = null;
-
-
-
   selectOption(option: string , quesNo:number) {
     console.log(quesNo)
     this.selectedOption = option;
@@ -165,7 +114,7 @@ totalMinut=0
     }
   }
 
-  existQuize(){
+  submitQuiz(){
     this.routs.navigate(['result'])
   }
 

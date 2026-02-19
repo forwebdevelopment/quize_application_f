@@ -36,4 +36,11 @@ export class Api{
         const url = `${this.apiUrl}Quiz`
         return this.http.post(url,data)
     }
+
+
+
+    GetQuizByFilter(levelID:number , subjectId:number , numberofquiz:number){
+        const url = `${this.apiUrl}Quiz/?levelId=${levelID}&subjectId=${subjectId}&NumberQuize=${numberofquiz}`
+        return this.http.get(url)
+    }
 }

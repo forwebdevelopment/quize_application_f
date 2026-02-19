@@ -1,6 +1,6 @@
 import { Injectable , signal} from '@angular/core';
 import { single } from 'rxjs';
-import { TenantData } from '../models/models';
+import { QuizResponse, TenantData } from '../models/models';
 
 
 @Injectable({
@@ -11,6 +11,12 @@ export class Shared {
   isTimerEnable = signal(false)
   Category = signal("non")
   Time = signal(0)
+  QuizResponse = signal<QuizResponse|null>({
+    data:[],
+    statusCode:0,
+    message:'intialization'
+
+  })
   TenantData = signal<TenantData|null>({
     categories:[],
     levels:[],

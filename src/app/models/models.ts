@@ -34,3 +34,21 @@ export interface Card{
   levelName:string;
   subject:string;
 }
+
+
+
+export interface QuizResponse {
+  data: QuizData[];
+  statusCode: number;
+  message: string;
+}
+
+
+export interface QuizData {
+  quizeid: number;
+  question: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+}

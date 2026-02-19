@@ -69,21 +69,21 @@
         placeholder="Enter time in minut "
       />
     </div>
-    <button (click)="applyFilters()">Apply Filters</button>
+    <!-- <button (click)="applyFilters()">Apply Filters</button> -->
   </aside>
 
 
   <section class="quiz-results">
     <h3>Filtered Quizzes</h3>
-    <div class="quiz-main">
+    <div class="quiz-main" >
       @for (quiz of this.sharedService.TenantData()?.card; track $index) {
-       <div class="quiz-card" routerLink="/quiz_start">
+       <div class="quiz-card"  (click)=" getQuiz(quiz)">
          <h4>{{ quiz.heading }}</h4>
          <p>Category: {{ quiz.catName }}</p>
          <p>Level: {{ quiz.levelName }}</p>
          <p>Number of Questions: {{ numberOfQuestions }}</p>
           @if (filters.useTimer) {
-         <p >Timer: {{ filters.timePerQuestion }}</p>
+            <p >Timer: {{ filters.timePerQuestion }}</p>
           }
        </div>
      }

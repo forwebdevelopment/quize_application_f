@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ɵEmptyOutletComponent, RouterLink, Router } from "@angular/router";
 import { Shared } from '../../shared/shared';
 import { Level, Subject } from '../../models/models';
+import { Api } from '../../core/api';
+import { LoaderService } from '../../core/loader';
 
 @Component({
   selector: 'app-quiz-filter',
@@ -30,7 +32,7 @@ export class QuizFilter {
 
  
 
-  constructor(private cd:ChangeDetectorRef , private routs:Router ){
+  constructor(private cd:ChangeDetectorRef , private routs:Router , private api:Api , private loaderService: LoaderService) {
 
   }
   ngOnInit(){
@@ -46,13 +48,6 @@ export class QuizFilter {
 
 
 
-  quizzes = [
-    { title: 'C# Basics', category: 'Tech', level: 'Beginner', syllabus: ['C#'] },
-    { title: 'Advanced SQL', category: 'Tech', level: 'Intermediat', syllabus: ['SQL'] },
-    { title: 'Python for Data Science', category: 'Tech', level: 'Intermediat', syllabus: ['Python'] },
-    { title: 'History', category: 'Non Tech', level: 'non', syllabus: ["History"] },
-    { title: 'General Knowledge', category: 'Non Tech', level: 'non', syllabus: ["General Knowledge"] }
-  ];
 
 
 
@@ -118,25 +113,33 @@ enterTime(){
      this.sharedService.TenantData.set(tenantdata)
      debugger
      tenantdata.card =    this.sharedService.TenantData()?.card.filter(c=>c.subject.toLocaleLowerCase()==this.filters.syllabus.toLocaleLowerCase()&&
-      (c.levelName.toLocaleLowerCase()==this.filters.level.toLocaleLowerCase() || this.filters.level=='Select Category'))
+      (c.levelName.toLocaleLowerCase()==this.filters.level.toLocaleLowerCase() || this.filters.level=='Select Category' || this.filters.category=='Non Tech'))
      this.sharedService.TenantData.set(tenantdata) 
 
   }
 
 
 
+  getQuiz(data:any){
 
-  filteredQuizzes = [...this.quizzes];
 
-  applyFilters() {
     debugger
+    this.loaderService.show();
+     let levelId:any = this.sharedService.TenantData()?.levels.find(c=>c.levelName.toLocaleLowerCase()==data.levelName.toLocaleLowerCase())?.levelId;
+     let subjectId:any = this.sharedService.TenantData()?.subjects.find(s=>s.subject_Name.toLocaleLowerCase()==data.subject.toLocaleLowerCase())?.subjectId;
+      this.api.GetQuizByFilter(levelId,subjectId,this.numberOfQuestions).subscribe((res:any)=>{
+    
+       alert("load quiz")
+       debugger
+      
+        this.sharedService.QuizResponse.set(res)
+       this.loaderService.hide()
+       this.routs.navigate(['/quiz_start'])
 
-    // this.filteredQuizzes = this.quizzes.filter(q => {
-    //   const matchCategory = this.filters.category ? q.category === this.filters.category : true;
-    //   const matchLevel = this.filters.level ? q.level === this.filters.level : q.level=='non'?true:false;
-    //   const matchSyllabus = this.filters.syllabus ? q.syllabus.includes(this.filters.syllabus) : true;
-    //   return matchCategory && matchLevel && matchSyllabus;
-    // });
-  }
+        })
+
+
+      }
+
 
 }

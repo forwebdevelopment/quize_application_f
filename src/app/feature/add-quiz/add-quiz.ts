@@ -90,9 +90,9 @@ export class AddQuiz {
   // Submit
   submitQuiz() {
     console.log('Quiz Data:', this.quizForm.value);
-    this.loaderService.show();
+   // this.loaderService.show();
     this.api.AddQuiz(this.quizForm.value).subscribe({next:(val:any)=>{
-      this.loaderService.hide()
+    //  this.loaderService.hide()
       if(val.statusCode==200){
       this.toast.success('Quiz Added Succussfully');
       }else{
@@ -102,7 +102,7 @@ export class AddQuiz {
       console.log(val)
     },error:(err:any)=>{
       console.log(err)
-       this.loaderService.hide()
+     //  this.loaderService.hide()
     }})
     
 

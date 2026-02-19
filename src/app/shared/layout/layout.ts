@@ -33,12 +33,12 @@ export class Layout {
 
     TenantData(){
       
-           this.loaderService.show();
+     // this.loaderService.show();
       this.api.TenantApi().subscribe({next:(val:any)=>{
-      this.loaderService.hide()
-     this._shared.TenantData.set(val.data)
+     // this.loaderService.hide()
+      this._shared.TenantData.set(val.data)
       this._shared.CardData.set(val.data.card)
-     this.cd.detectChanges()
+      this.cd.detectChanges()
 
       },
       error:(err:any)=>{
