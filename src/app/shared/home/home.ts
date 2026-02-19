@@ -22,7 +22,7 @@ export class Home {
     sessionStorage.setItem('quizCategory', category);
 
     // Redirect to quiz filter page with category context
-    this.router.navigate(['/quiz_filter']);
+    this.router.navigate(['/quizcard']);
   }
 
 

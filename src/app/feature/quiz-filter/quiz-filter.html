@@ -77,7 +77,7 @@
     <h3>Filtered Quizzes</h3>
     <div class="quiz-main" >
       @for (quiz of this.sharedService.TenantData()?.card; track $index) {
-       <div class="quiz-card"  (click)=" getQuiz(quiz)">
+       <div class="quiz-card"  (click)="getQuiz(quiz)">
          <h4>{{ quiz.heading }}</h4>
          <p>Category: {{ quiz.catName }}</p>
          <p>Level: {{ quiz.levelName }}</p>

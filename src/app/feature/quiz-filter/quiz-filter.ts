@@ -10,7 +10,7 @@ import { LoaderService } from '../../core/loader';
 @Component({
   selector: 'app-quiz-filter',
   imports: [FormsModule,
-    CommonModule, RouterLink],
+    CommonModule],
   templateUrl: './quiz-filter.html',
   styleUrl: './quiz-filter.css',
 })
@@ -22,7 +22,7 @@ export class QuizFilter {
    level:Level[]=[]
   numberOfQuestions:number = 25
  filters = {
-    category: 'Select Category',
+    category: 'Tech',
     level: 'Select Level',
     syllabus: 'Select Syllabus',
     useTimer: false,
@@ -36,9 +36,6 @@ export class QuizFilter {
 
   }
   ngOnInit(){
-    debugger
-
-    
 
      this.sharedService.QuizFilter()
      this.filters.category = this.sharedService.Category()
@@ -128,10 +125,6 @@ enterTime(){
      let levelId:any = this.sharedService.TenantData()?.levels.find(c=>c.levelName.toLocaleLowerCase()==data.levelName.toLocaleLowerCase())?.levelId;
      let subjectId:any = this.sharedService.TenantData()?.subjects.find(s=>s.subject_Name.toLocaleLowerCase()==data.subject.toLocaleLowerCase())?.subjectId;
       this.api.GetQuizByFilter(levelId,subjectId,this.numberOfQuestions).subscribe((res:any)=>{
-    
-       alert("load quiz")
-       debugger
-      
         this.sharedService.QuizResponse.set(res)
        this.loaderService.hide()
        this.routs.navigate(['/quiz_start'])

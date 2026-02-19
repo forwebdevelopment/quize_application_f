@@ -14,7 +14,7 @@ export const routes: Routes = [
 
     {path:'' , component:Home},
     {path:'home' , component:Home},
-    {path:'quiz_filter' ,component:QuizFilter},
+    {path:'quizcard' ,component:QuizFilter},
     {path:'quiz_start' ,component:StartQuiz , canActivate:[authGuard]},
     {path:'result',component:Results},
     {path:'add_quiz',component:AddQuiz , canActivate:[IsLogin]},
