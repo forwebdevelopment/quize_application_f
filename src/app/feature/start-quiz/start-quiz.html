@@ -11,7 +11,7 @@
     <ul class="options-list">
       <li *ngFor="let option of question.options"
           [class.selected]="selectedOption === option"
-          (click)="selectOption(option ,question.queNo)">
+          (click)="selectOption(option ,question.queNo , currentQuestion)">
         {{ option }}
       </li>
     </ul>

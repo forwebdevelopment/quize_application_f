@@ -28,7 +28,9 @@ export class StartQuiz {
 
 
   isTimerEnable:boolean = this.sharedService.isTimerEnable()
-
+   
+  answerSeat:{"queNo": number, "option": string}[] = []
+  answerMark:{"queNo":number, "option":string , currentQuestion:number}[]=[]
 
   ngOnInit(){
 
@@ -37,7 +39,7 @@ this.questions=[]
      
       this.questions.push({
         text: element.question,
-        queNo: element.questionId,
+        queNo: element.quizeid,
         options: [element.option1 , element.option2 , element.option3 , element.option4]
       })
     }
@@ -90,26 +92,50 @@ totalMinut=0
     }, 1000);
   }
 
+  selectOption(option: string , quesNo:number , currentQue:any) {
 
-  selectOption(option: string , quesNo:number) {
-    console.log(quesNo)
+     var index = this.answerSeat.findIndex(x=>x.queNo==quesNo)
+     if(index>-1){
+          this.answerSeat[index].option=option
+           this.answerMark[index].option=option
+     }else{
+
+    this.answerSeat.push({
+      queNo:quesNo,
+      option:option
+    })
+    this.answerMark.push({
+       queNo:quesNo,
+       option:option,
+       currentQuestion:currentQue
+    })
+  }
+    console.log(this.answerSeat)
     this.selectedOption = option;
   }
 
   nextQuestion() {
-    debugger
     if (this.currentQuestion < this.totalQuestions) {
       this.currentQuestion++;
       this.question = this.questions[this.currentQuestion-1]
-      // Load next question logic here
+         
+     var index = this.answerMark.findIndex(x=>x.currentQuestion == this.currentQuestion)
+     if(index>-1){
+          this.selectedOption=this.answerMark[index].option
+     }
     }
   }
 
   previousQuestion() {
+    debugger
     if (this.currentQuestion > 1) {
       this.currentQuestion--;
         this.question = this.questions[this.currentQuestion-1]
-      // Load previous question logic here
+        
+     var index = this.answerMark.findIndex(x=>x.currentQuestion == this.currentQuestion)
+     if(index>-1){
+          this.selectedOption=this.answerMark[index].option
+     }
     }
   }
 

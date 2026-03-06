@@ -13,7 +13,9 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types":["vita/client"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
